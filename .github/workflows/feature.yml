@@ -9,9 +9,9 @@ permissions:
       contents: write
 
 env:
-  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   
 jobs:
   build-and-deploy:
@@ -63,7 +63,7 @@ jobs:
   
       - name: Initialize Terraform Backend
         env:
-          AZURE_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
+          ARM_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
         run: |
           touch backend.tf
           cat <<EOF > backend.tf
@@ -85,7 +85,7 @@ jobs:
       # An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
       - name: Terraform Plan
         env:
-          AZURE_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
+          ARM_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
         id: tf-plan
         run: |
           export exitcode=0
@@ -102,7 +102,7 @@ jobs:
 
       - name: Terraform Apply
         env:
-          AZURE_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
+          ARM_ACCESS_KEY: ${{ steps.check_backend.outputs.accountKey }}
         id: tf-apply
         # if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
         run: terraform apply -auto-approve tfplan
