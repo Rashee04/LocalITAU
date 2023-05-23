@@ -3,13 +3,13 @@
 # current Tenant ID used as the ID for the "Tenant Root Group"
 # Management Group.
 
-data "azurerm_client_config" "core" {}
+#data "azurerm_client_config" "core" {}
 
 # Obtain client configuration from the "identity" provider
 
-data "azurerm_client_config" "iam" {
-  provider = azurerm.iam
-}
+#data "azurerm_client_config" "iam" {
+#  provider = azurerm.iam
+#}
 
 # Declare the Azure landing zones Terraform module
 # and provide a base configuration.

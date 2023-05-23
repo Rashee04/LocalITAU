@@ -1,14 +1,11 @@
 resource_groups={
 
- resource_group_1={
-
  name="testrg"
  location="eastus"
  tags={
- env=""
+ env="dev"
  automated_by="ms"
 
 }
 
-}
 }
