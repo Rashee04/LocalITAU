@@ -1,7 +1,7 @@
 #-
 #-ResourceGroup
 #-
-variable"resource_groups"{
+variable "resource_groups"{
 
  description="Resourcegroups"
  type=map(object({
