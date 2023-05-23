@@ -15,7 +15,7 @@ env:
   
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latestrashee
+    runs-on: ubuntu-latest
     steps:
 
       - name: Check Az version
