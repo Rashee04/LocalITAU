@@ -50,13 +50,13 @@ jobs:
           tfstate_file=".terraform/terraform.tfstate"
           if [ ! -f "$tfstate_file" ]; then
             # Create RG
-            az group create --name ITAUTEST --location brazilsouth
+            az group create --name ITAUTEST1 --location brazilsouth
             # Create Storage and container
-            az storage account create --name rasheestorage96 --resource-group ITAUTEST --location brazilsouth --sku Standard_LRS --kind StorageV2 --encryption-services blob
-            accountKey=$(az storage account keys list --account-name rasheestorage96 --resource-group ITAUTEST --output tsv --query "[0].value")
+            az storage account create --name rasheestorage96 --resource-group ITAUTEST1 --location brazilsouth --sku Standard_LRS --kind StorageV2 --encryption-services blob
+            accountKey=$(az storage account keys list --account-name rasheestorage96 --resource-group ITAUTEST1 --output tsv --query "[0].value")
             az storage container create --name container04 --account-name rasheestorage96 --account-key $accountKey
             # Enable storage versioning
-            az storage account blob-service-properties update --account-name rasheestorage96 --resource-group ITAUTEST --enable-versioning true
+            az storage account blob-service-properties update --account-name rasheestorage96 --resource-group ITAUTEST1 --enable-versioning true
             echo "::set-output name=accountKey::$accountKey"
           fi
         shell: bash
