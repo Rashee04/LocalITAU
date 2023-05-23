@@ -1,35 +1,18 @@
-terraform{
-
-required_providers{
-
- azurerm={
- source="hashicorp/azurerm"
- version="~>3.42.0"
- configuration_aliases=[
-
- azurerm.identity,
-]
-}
+terraform {
+  required_providers {
+    azurerm = {
+      source                = "hashicorp/azurerm"
+      version               = "~> 3.42.0"
+    }
+  }
 }
 
-backend"azurerm"{}
 
-}
+# Declare a standard provider block using your preferred configuration.
+# This will be used for the deployment of all "Core resources".
 
-#Declareastandardproviderblockusingyourpreferredconfiguration.
-#Thiswillbeusedforthedeploymentofall"Coreresources".
 
-provider"azurerm"{
-
-features{}
-
-}
-
-provider"azurerm"{
-
- alias="identity"
- subscription_id="xxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-features{}
-
+provider "azurerm" {
+  features {}
+  use_oidc = true
 }
